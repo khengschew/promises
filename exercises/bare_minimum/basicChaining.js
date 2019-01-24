@@ -18,13 +18,10 @@ Promise.promisifyAll(fs);
 var fetchProfileAndWriteToFile = function(readFilePath, writeFilePath) {
   return cbs.pluckFirstLineFromFileAsync(readFilePath)
     .then((user) => {
-      console.log('user:', user);
       return promisificaperexpialidocious.getGitHubProfileAsync(user);
     })
     .then((res) => {
-      res = JSON.stringify(res);
-      console.log('result:', res);
-      fs.writeFile(writeFilePath);
+      return fs.writeFileAsync(writeFilePath, JSON.stringify(res));
     });
 };
 
