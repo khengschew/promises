@@ -6,8 +6,15 @@ var fs = require('fs');
 var request = require('request');
 
 // This function should retrieve the first line of the file at `filePath`
-var pluckFirstLineFromFile = function (filePath) {
-  // TODO
+var pluckFirstLineFromFile = function (filePath, callback) {
+  fs.readFile(filePath, (err, contents) => {
+    if (err) {
+      callback(err);
+    } else {
+      var contentArr = contents.toString().split('\n');
+      callback(err, contentArr[0]);
+    }
+  });
 };
 
 // This function should retrieve the status code of a GET request to `url`
